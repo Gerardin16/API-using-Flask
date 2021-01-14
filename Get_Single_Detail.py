@@ -1,5 +1,5 @@
 import flask
-from flask import request, jsonify,abort
+from flask import  jsonify,abort,make_response
 
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
@@ -39,6 +39,10 @@ def get_person(p_id):
     # If ID is provided,return the result.
     return jsonify(person[0])
 
+
+@app.errorhandler(404)
+def not_found(error):
+    return make_response(jsonify({'error': 'Not found'}), 404)
 
 if __name__ == '__main__':
     app.run()
