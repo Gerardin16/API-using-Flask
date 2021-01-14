@@ -37,7 +37,7 @@ def get_person(p_id):
     if len(person) == 0:
         abort(404)
     # If ID is provided,return the result.
-    return jsonify({'person': person[0]})
+    return jsonify(person[0])
 
 
 if __name__ == '__main__':
