@@ -30,7 +30,7 @@ family = [
 def homepage():
     return '<h1>Family Records</h1>'
 
-
+# A route to create a new record
 @app.route('/family/api/v1/details', methods=['POST'])
 def create_record():
     if not request.json or not 'name' in request.json:
@@ -44,12 +44,20 @@ def create_record():
     family.append(person)
     return jsonify(person), 201
 
-    
-@app.errorhandler(404)
-def not_found(error):
-    return make_response(jsonify({'error': 'Not found'}), 404)
+
+# A route to check the records again
+@app.route('/family/api/v1/details', methods=['GET'])
+def get_details():
+    return jsonify(family)
 
 
+# A route to handle the error when the data cannot be processed
+@app.errorhandler(400)
+def cannot_process(error):
+    return make_response(jsonify({'error': 'Cannot process the data'}), 400)
+
+# Curl command to create a new record
+# $ curl -i -H "Content-Type: application/json" -X POST -d '{"name": "Maria", "age": 1, "DOB":"01-01-2020"}' http://localhost:5000/family/api/v1/details
 
 if __name__ == '__main__':
     app.run()

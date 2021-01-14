@@ -1,5 +1,5 @@
 import flask
-from flask import request, jsonify
+from flask import jsonify
 
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
@@ -31,9 +31,13 @@ def homepage():
 
 
 # A route to return all of the available entries in our family section.
-@app.route('/family/api/v1/details/', methods=['GET'])
+@app.route('/family/api/v1/details', methods=['GET'])
 def get_details():
     return jsonify(family)
+
+
+# Curl command to get all data
+# $ curl -i http://localhost:5000/family/api/v1/details
 
 
 if __name__ == '__main__':
