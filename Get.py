@@ -31,8 +31,10 @@ def homepage():
 
 
 # A route to return all of the available entries in our family section.
-@app.route('/details/all', methods=['GET'])
+@app.route('/family/api/v1/details/all', methods=['GET'])
 def get_details():
     return jsonify(family)
 
-app.run()
+
+if __name__ == '__main__':
+    app.run()

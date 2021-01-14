@@ -1,5 +1,5 @@
 import flask
-from flask import request, jsonify
+from flask import request, jsonify,abort
 
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
@@ -30,28 +30,15 @@ family = [
 def homepage():
     return '<h1>Family Records</h1>'
 
+@app.route('/family/api/v1/details/<int:p_id>', methods=['GET'])
+def get_person(p_id):
+    person = [person for person in family if person['id'] == p_id]
+    #  If no ID is provided, display an error in the browser.
+    if len(person) == 0:
+        abort(404)
+    # If ID is provided,return the result.
+    return jsonify({'person': person[0]})
 
-@app.route('/details', methods=['GET'])
-def get_id():
-    # Check if an ID was provided as part of the URL.
-    # If ID is provided, assign it to a variable.
-    # If no ID is provided, display an error in the browser.
-    if 'id' in request.args:
-        id = int(request.args['id'])
-    else:
-        return "Error: No id field provided. Please specify an id."
 
-    # Create an empty list for our results
-    results = []
-
-    # Loop through the data and match results that fit the requested ID.
-    # IDs are unique, but other fields might return many results
-    for person in family:
-        if person['id'] == id:
-            results.append(person)
-
-    # Use the jsonify function from Flask to convert our list of
-    # Python dictionaries to the JSON format.
-    return jsonify(results)
-
-app.run()
+if __name__ == '__main__':
+    app.run()
