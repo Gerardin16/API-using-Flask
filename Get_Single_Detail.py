@@ -42,7 +42,7 @@ def get_person(p_id):
     return jsonify(person[0])
 
 
-# A route to handle the error when the id is not found
+# A error handler to handle  when the id is not found
 @app.errorhandler(404)
 def not_found(error):
     return make_response(jsonify({'error': 'Not found'}), 404)

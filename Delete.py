@@ -46,13 +46,13 @@ def delete_record(p_id):
 def get_details():
     return jsonify(family)
 
-# A route to handle the error when the id is not found
+# A error handler to handle when the id is not found
 @app.errorhandler(404)
 def not_found(error):
     return make_response(jsonify({'error': 'Not found'}), 404)
 
 
-# Curl command to dlete a record
+# Curl command to delete a record
 # curl -i -H "Content-Type: application/json" -X DELETE  http://localhost:5000/family/api/v1/details/1
 
 

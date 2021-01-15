@@ -62,7 +62,7 @@ def get_details():
 def not_found(error):
     return make_response(jsonify({'error': 'Not found'}), 404)
 
-# A route to handle the error when the data cannot be processed
+# A error handler to handle when the data cannot be processed
 @app.errorhandler(400)
 def cannot_process(error):
     return make_response(jsonify({'error': 'Cannot process the data'}), 400)
