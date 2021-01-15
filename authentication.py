@@ -38,10 +38,10 @@ def get_password(username):
 def homepage():
     return '<h1>Family Records</h1>'
 
-# A error handler to handle for unauthorized accedd
+# A error handler to handle for unauthorized access
 @auth.error_handler
 def unauthorized():
-    return make_response(jsonify({'error': 'Unauthorized access'}), 401)
+    return make_response(jsonify({'error': 'Unauthorized access'}), 403)
 
 
 
